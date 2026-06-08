@@ -1,0 +1,1720 @@
+<!---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ryo Kaijiri Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#fafafa;
+    --card:#ffffff;
+    --text:#111111;
+    --muted:#7d7d7d;
+    --line:#e8e8e8;
+    --accent:#6f8cff;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+}
+
+.container{
+    width:min(1100px,90%);
+    margin:auto;
+}
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(250,250,250,0.88);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(0,0,0,0.04);
+    z-index:100;
+}
+
+.nav-inner{
+    height:72px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:0.95rem;
+    font-weight:600;
+    letter-spacing:0.08em;
+}
+
+.nav-links{
+    display:flex;
+    gap:2rem;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--muted);
+    font-size:0.92rem;
+    transition:0.2s;
+}
+
+.nav-links a:hover{
+    color:var(--accent);
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+}
+
+.hero-grid{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6rem;
+    align-items:center;
+}
+
+.hero-left h1{
+    font-size:clamp(4rem,10vw,8rem);
+    line-height:0.95;
+    letter-spacing:-0.07em;
+    margin-bottom:1.5rem;
+}
+
+.hero-name-en{
+    display:block;
+    font-size:0.18em;
+    font-weight:500;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:1rem;
+}
+
+.hero-meta{
+    display:flex;
+    flex-direction:column;
+    gap:0.4rem;
+}
+
+.jp-school{
+    font-weight:500;
+    color:#222;
+    margin-bottom:0.8rem;
+}
+
+.en-school{
+    color:var(--muted);
+    font-size:0.92rem;
+    line-height:1.6;
+}
+
+.hero-right{
+    color:var(--muted);
+    font-size:1.05rem;
+}
+
+.hero-right p{
+    margin-bottom:1.5rem;
+}
+
+.detail-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-top:1rem;
+
+    padding:0.9rem 1.5rem;
+
+    border:1px solid var(--accent);
+    border-radius:999px;
+
+    color:var(--accent);
+    text-decoration:none;
+    font-size:0.92rem;
+    font-weight:500;
+
+    transition:0.25s;
+}
+
+.detail-button:hover{
+    background:var(--accent);
+    color:white;
+    transform:translateY(-2px);
+}
+
+section{
+    padding:7rem 0;
+}
+
+.section-head{
+    margin-bottom:3rem;
+}
+
+.section-label{
+    font-size:0.82rem;
+    color:var(--accent);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:0.7rem;
+}
+
+.section-title{
+    font-size:2.2rem;
+    font-weight:600;
+    letter-spacing:-0.04em;
+}
+
+.projects{
+    display:flex;
+    flex-direction:column;
+    gap:3rem;
+}
+
+.project{
+    display:grid;
+    grid-template-columns:0.95fr 1.05fr;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:32px;
+    overflow:hidden;
+}
+
+.project-image{
+    position:relative;
+    overflow:hidden;
+    min-height:500px;
+    background:#f1f1f1;
+    border-right:1px solid var(--line);
+}
+
+.project-slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity 1s ease;
+}
+
+.project-slide.active{
+    opacity:1;
+}
+
+.project-body{
+    padding:3rem;
+}
+
+.project-meta{
+    font-size:0.82rem;
+    color:var(--muted);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:0.8rem;
+}
+
+.project h3{
+    font-size:2rem;
+    margin-bottom:1rem;
+    letter-spacing:-0.03em;
+}
+
+.project-description{
+    color:var(--muted);
+    margin-bottom:2rem;
+}
+
+.role-title{
+    font-size:0.82rem;
+    color:var(--muted);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:1rem;
+}
+
+.role-list{
+    display:flex;
+    flex-direction:column;
+    gap:0.8rem;
+    margin-bottom:2rem;
+}
+
+.role-item{
+    padding-left:1rem;
+    position:relative;
+}
+
+.role-item::before{
+    content:"—";
+    position:absolute;
+    left:0;
+    color:var(--muted);
+}
+
+.project-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    margin-bottom:2rem;
+}
+
+.info-item{
+    padding:1.3rem;
+    border-right:1px solid var(--line);
+}
+
+.info-item:last-child{
+    border-right:none;
+}
+
+.info-label{
+    font-size:0.74rem;
+    color:var(--muted);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:0.4rem;
+}
+
+.info-value{
+    font-size:1.05rem;
+    font-weight:600;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.7rem;
+}
+
+.tag{
+    border:1px solid var(--line);
+    padding:0.5rem 0.9rem;
+    border-radius:999px;
+    font-size:0.84rem;
+    color:var(--muted);
+    transition:0.2s;
+}
+
+.tag:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+}
+
+.skills{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1.5rem;
+}
+
+.skill-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:2rem;
+}
+
+.skill-card h3{
+    margin-bottom:1rem;
+}
+
+.skill-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.7rem;
+}
+
+.timeline{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:2.5rem;
+    padding-left:3rem;
+}
+
+.timeline-line{
+    position:absolute;
+    left:10px;
+    top:0;
+    width:2px;
+    height:100%;
+    background:#d8d8d8;
+}
+
+.timeline-item{
+    position:relative;
+}
+
+.timeline-dot{
+    position:absolute;
+    left:-3rem;
+    top:10px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:var(--accent);
+    border:4px solid #fafafa;
+    box-shadow:0 0 0 1px #dcdcdc;
+}
+
+.timeline-content{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:1.6rem;
+}
+
+.timeline-year{
+    color:var(--muted);
+    font-size:0.82rem;
+    margin-bottom:0.5rem;
+}
+
+.timeline-content p{
+    color:var(--muted);
+}
+
+.thought-box{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:3rem;
+    color:var(--muted);
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+    font-size:1.03rem;
+}
+
+.contact-box{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:3rem;
+}
+
+.contact-message{
+    font-size:1.25rem;
+    margin-bottom:2rem;
+}
+
+.email-label{
+    font-size:0.8rem;
+    color:var(--muted);
+    text-transform:uppercase;
+    margin-bottom:0.5rem;
+}
+
+.email-address{
+    font-size:1.4rem;
+    font-weight:600;
+    margin-bottom:3rem;
+}
+
+.links{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1rem;
+}
+
+.link{
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:1.4rem;
+    text-decoration:none;
+    color:var(--text);
+    transition:0.2s;
+}
+
+.link:hover{
+    transform:translateY(-3px);
+    border-color:var(--accent);
+}
+
+.link-name{
+    font-weight:600;
+    margin-bottom:0.3rem;
+}
+
+.link-handle{
+    color:var(--muted);
+    font-size:0.88rem;
+}
+
+footer{
+    padding:4rem 0;
+    text-align:center;
+    color:var(--muted);
+    font-size:0.9rem;
+}
+
+@media(max-width:900px){
+
+    .hero-grid,
+    .project,
+    .skills,
+    .links{
+        grid-template-columns:1fr;
+    }
+
+    .project-image{
+        border-right:none;
+        border-bottom:1px solid var(--line);
+        min-height:260px;
+    }
+
+    .project-info{
+        grid-template-columns:1fr;
+    }
+
+    .info-item{
+        border-right:none;
+        border-bottom:1px solid var(--line);
+    }
+
+    .info-item:last-child{
+        border-bottom:none;
+    }
+}
+
+@media(max-width:640px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        padding-top:4rem;
+    }
+
+    .hero h1{
+        font-size:4rem;
+    }
+
+    .project-body,
+    .contact-box,
+    .thought-box{
+        padding:2rem;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="container nav-inner">
+
+        <div class="logo">
+            Ryo Kaijiri Portfolio
+        </div>
+
+        <div class="nav-links">
+            <a href="#works">Works</a>
+            <a href="#skills">Skills</a>
+            <a href="#career">Career</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+    </div>
+
+</nav>
+
+<header class="hero">
+
+    <div class="container hero-grid">
+
+        <div class="hero-left">
+
+            <h1>
+                <span class="hero-name-en">Ryo Kaijiri</span>
+                貝尻 遼
+            </h1>
+
+            <div class="hero-meta">
+
+                <div class="jp-school">
+                    大阪大学基礎工学部システム科学科
+                </div>
+
+                <div class="en-school">
+                    Department of Systems Science,<br>
+                    School of Engineering Science,<br>
+                    Osaka University
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <p>
+                小学4年生からロボット開発に取り組み、
+                RCJ全国大会へ計7回出場。
+                ハードウェア設計、回路設計、
+                ロボット開発マネジメントを中心に活動しています。
+            </p>
+
+            <p>
+                2025シーズンでは「Toin Sigma」として
+                RCJ Soccer Lightweight部門 全国4位、
+                プレゼンポスター満点を獲得。
+                現在はRCJ Soccer Open部門にて
+                オープンなロボット開発にも取り組んでいます。
+            </p>
+
+            <p>
+                現在は大阪大学基礎工学部システム科学科にて、
+                システム科学・制御・情報工学を学んでいます。
+            </p>
+
+            <a href="#hardware-thought" class="detail-button">
+                View Detail
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ryo Kaijiri Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#fafafa;
+    --card:#ffffff;
+    --text:#111111;
+    --muted:#7d7d7d;
+    --line:#e8e8e8;
+    --accent:#6f8cff;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+}
+
+.container{
+    width:min(1100px,90%);
+    margin:auto;
+}
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(250,250,250,0.88);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(0,0,0,0.04);
+    z-index:100;
+}
+
+.nav-inner{
+    height:72px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:0.95rem;
+    font-weight:600;
+    letter-spacing:0.08em;
+}
+
+.nav-links{
+    display:flex;
+    gap:2rem;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--muted);
+    font-size:0.92rem;
+    transition:0.2s;
+}
+
+.nav-links a:hover{
+    color:var(--accent);
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+}
+
+.hero-grid{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7rem;
+    align-items:center;
+}
+
+.hero-left{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding-left:2rem;
+}
+
+.hero-left h1{
+    font-size:clamp(4rem,10vw,8rem);
+    line-height:1.05;
+    letter-spacing:-0.06em;
+    margin-bottom:2.2rem;
+}
+
+.hero-name-en{
+    display:block;
+    font-size:0.16em;
+    font-weight:500;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:1.4rem;
+}
+
+.hero-main-name{
+    letter-spacing:0.08em;
+}
+
+.hero-meta{
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+}
+
+.jp-school{
+    font-weight:500;
+    color:#222;
+    letter-spacing:0.12em;
+    line-height:2;
+}
+
+.en-school{
+    color:var(--muted);
+    font-size:0.92rem;
+    line-height:2;
+    letter-spacing:0.08em;
+}
+
+.hero-right{
+    color:var(--muted);
+    font-size:1.05rem;
+}
+
+.hero-right p{
+    margin-bottom:1.5rem;
+}
+
+.detail-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-top:1rem;
+
+    padding:0.9rem 1.5rem;
+
+    border:1px solid var(--accent);
+    border-radius:999px;
+
+    color:var(--accent);
+    text-decoration:none;
+    font-size:0.92rem;
+    font-weight:500;
+
+    transition:0.25s;
+}
+
+.detail-button:hover{
+    background:var(--accent);
+    color:white;
+    transform:translateY(-2px);
+}
+
+section{
+    padding:7rem 0;
+}
+
+.section-head{
+    margin-bottom:3rem;
+}
+
+.section-label{
+    font-size:0.82rem;
+    color:var(--accent);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:0.7rem;
+}
+
+.section-title{
+    font-size:2.2rem;
+    font-weight:600;
+    letter-spacing:-0.04em;
+}
+
+.projects{
+    display:flex;
+    flex-direction:column;
+    gap:3rem;
+}
+
+.project{
+    display:grid;
+    grid-template-columns:0.95fr 1.05fr;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:32px;
+    overflow:hidden;
+}
+
+.project-image{
+    position:relative;
+    overflow:hidden;
+    min-height:500px;
+    background:#f1f1f1;
+    border-right:1px solid var(--line);
+}
+
+.project-slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity 1s ease;
+}
+
+.project-slide.active{
+    opacity:1;
+}
+
+.project-body{
+    padding:3rem;
+}
+
+.project-meta{
+    font-size:0.82rem;
+    color:var(--muted);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:0.8rem;
+}
+
+.project h3{
+    font-size:2rem;
+    margin-bottom:1rem;
+    letter-spacing:-0.03em;
+}
+
+.project-description{
+    color:var(--muted);
+    margin-bottom:2rem;
+}
+
+.role-title{
+    font-size:0.82rem;
+    color:var(--muted);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:1rem;
+}
+
+.role-list{
+    display:flex;
+    flex-direction:column;
+    gap:0.8rem;
+    margin-bottom:2rem;
+}
+
+.role-item{
+    padding-left:1rem;
+    position:relative;
+}
+
+.role-item::before{
+    content:"—";
+    position:absolute;
+    left:0;
+    color:var(--muted);
+}
+
+.project-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    margin-bottom:2rem;
+}
+
+.info-item{
+    padding:1.3rem;
+    border-right:1px solid var(--line);
+}
+
+.info-item:last-child{
+    border-right:none;
+}
+
+.info-label{
+    font-size:0.74rem;
+    color:var(--muted);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:0.4rem;
+}
+
+.info-value{
+    font-size:1.05rem;
+    font-weight:600;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.7rem;
+}
+
+.tag{
+    border:1px solid var(--line);
+    padding:0.5rem 0.9rem;
+    border-radius:999px;
+    font-size:0.84rem;
+    color:var(--muted);
+    transition:0.2s;
+}
+
+.tag:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+}
+
+.skills{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1.5rem;
+}
+
+.skill-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:2rem;
+}
+
+.skill-card h3{
+    margin-bottom:1rem;
+}
+
+.skill-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.7rem;
+}
+
+.timeline{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:2.5rem;
+    padding-left:3rem;
+}
+
+.timeline-line{
+    position:absolute;
+    left:10px;
+    top:0;
+    width:2px;
+    height:100%;
+    background:#d8d8d8;
+}
+
+.timeline-item{
+    position:relative;
+}
+
+.timeline-dot{
+    position:absolute;
+    left:-3rem;
+    top:10px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:var(--accent);
+    border:4px solid #fafafa;
+    box-shadow:0 0 0 1px #dcdcdc;
+}
+
+.timeline-content{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:1.6rem;
+}
+
+.timeline-year{
+    color:var(--muted);
+    font-size:0.82rem;
+    margin-bottom:0.5rem;
+}
+
+.timeline-content p{
+    color:var(--muted);
+}
+
+.thought-box{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:3rem;
+    color:var(--muted);
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+    font-size:1.03rem;
+}
+
+.contact-box{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:3rem;
+}
+
+.contact-message{
+    font-size:1.25rem;
+    margin-bottom:2rem;
+}
+
+.email-label{
+    font-size:0.8rem;
+    color:var(--muted);
+    text-transform:uppercase;
+    margin-bottom:0.5rem;
+}
+
+.email-address{
+    font-size:1.4rem;
+    font-weight:600;
+    margin-bottom:3rem;
+}
+
+.links{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1rem;
+}
+
+.link{
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:1.4rem;
+    text-decoration:none;
+    color:var(--text);
+    transition:0.2s;
+}
+
+.link:hover{
+    transform:translateY(-3px);
+    border-color:var(--accent);
+}
+
+.link-name{
+    font-weight:600;
+    margin-bottom:0.3rem;
+}
+
+.link-handle{
+    color:var(--muted);
+    font-size:0.88rem;
+}
+
+footer{
+    padding:4rem 0;
+    text-align:center;
+    color:var(--muted);
+    font-size:0.9rem;
+}
+
+@media(max-width:900px){
+
+    .hero-grid,
+    .project,
+    .skills,
+    .links{
+        grid-template-columns:1fr;
+    }
+
+    .project-image{
+        border-right:none;
+        border-bottom:1px solid var(--line);
+        min-height:260px;
+    }
+
+    .project-info{
+        grid-template-columns:1fr;
+    }
+
+    .info-item{
+        border-right:none;
+        border-bottom:1px solid var(--line);
+    }
+
+    .info-item:last-child{
+        border-bottom:none;
+    }
+
+    .hero-left{
+        padding-left:0;
+    }
+}
+
+@media(max-width:640px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        padding-top:4rem;
+    }
+
+    .hero h1{
+        font-size:4rem;
+    }
+
+    .project-body,
+    .contact-box,
+    .thought-box{
+        padding:2rem;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="container nav-inner">
+
+        <div class="logo">
+            Ryo KAIJIRI Portfolio
+        </div>
+
+        <div class="nav-links">
+            <a href="#works">Works</a>
+            <a href="#skills">Skills</a>
+            <a href="#career">Career</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+    </div>
+
+</nav>
+
+<header class="hero">
+
+    <div class="container hero-grid">
+
+        <div class="hero-left">
+
+            <h1>
+                <span class="hero-name-en">Ryo KAIJIRI</span>
+
+                <span class="hero-main-name">
+                    貝尻 遼
+                </span>
+            </h1>
+
+            <div class="hero-meta">
+
+                <div class="jp-school">
+                    大阪大学基礎工学部システム科学科
+                </div>
+
+                <div class="en-school">
+                    Department of Systems Science,<br>
+                    School of Engineering Science,<br>
+                    Osaka University
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <p>
+                小学4年生からロボット開発に取り組み、RCJ全国大会へ計7回出場。<br>ハードウェア設計、回路設計、ロボット開発マネジメントを中心に活動しています。
+            </p>
+
+            <p>
+                2025年は「Toin Sigma」としてRCJ Soccer Lightweight部門 全国4位、TDP(プレゼンポスター)満点を獲得。
+                現在はRCJ Soccer Vision部門にて「Thrive」としてオープンなロボット開発にも取り組んでいます。
+            </p>
+
+            <p>
+                現在は大阪大学基礎工学部システム科学科にて、システム科学・制御・情報工学を学んでいます。
+            </p>
+
+            <a href="#hardware-thought" class="detail-button">
+                Philosophy
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+</body>
+</html>
+<section id="works">
+
+    <div class="container">
+
+        <div class="section-head">
+            <div class="section-label">Projects</div>
+            <h2 class="section-title">Selected Works</h2>
+        </div>
+
+        <div class="projects">
+
+            <article class="project">
+
+                <div class="project-image">
+
+                    <img src="images/toinsigma-1.jpeg" alt="attacker robot" class="project-slide active">
+                    <img src="images/toinsigma-2.jpeg" alt="" class="project-slide">
+
+                </div>
+
+                <div class="project-body">
+
+                    <div class="project-meta">
+                        RCJ Soccer Lightweight · 2025
+                    </div>
+
+                    <h3>Toin Sigma</h3>
+
+                    <p class="project-description">
+                        RCJ Soccer Lightweight部門に出場。
+                        「モーターに印加する電源電圧の昇圧化」を初めて実現させる。
+                        競技者として参加する中、Soccer Entry リーグに出場するロボット教室を主催する。
+                    </p>
+
+                    <div class="role-title">My Role</div>
+
+                    <div class="role-list">
+
+                        <div class="role-item">
+                            チームリーダーとして開発全体の進行管理・設計方針統括
+                        </div>
+
+                        <div class="role-item">
+                            Autodesk Fusionを用いたロボット機構設計・3D CAD制作、CNC加工・3Dプリント
+                        </div>
+
+                        <div class="role-item">
+                            KiCadを用いた回路基板設計・部品の半田付けと組み立て、筐体のメンテナンス
+                        </div>
+
+                        <div class="role-item">
+                            ベースコードの設計・開発およびチームメンバーへの共有
+                        </div>
+
+                        <div class="role-item">
+                            TDP(プレゼンポスター)の制作、資金・部品調達
+                        </div>
+
+                    </div>
+
+                    <div class="project-info">
+
+                        <div class="info-item">
+                            <div class="info-label">Category</div>
+                            <div class="info-value">Soccer Lightweight (Infrared)
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">feature</div>
+                            <div class="info-value">モーター電源の昇圧化</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">Result</div>
+                            <div class="info-value">- 全国4位<br>- TDP 満点</div>
+                        </div>
+
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">Autodesk Fusion</span>
+                        <span class="tag">KiCad</span>
+                        <span class="tag">Arduino IDE</span>
+                        <span class="tag">MaixPy IDE</span>
+                        <span class="tag">VS Code</span>
+                        <span class="tag">GitHub</span>
+                        <span class="tag">CNC</span>
+                        <span class="tag">3D print</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+            <article class="project">
+
+                <div class="project-image">
+
+                    <img src="images/thrive-1.jpeg" class="project-slide active">
+                    <img src="images/thrive-2.jpeg" class="project-slide">
+
+                </div>
+
+                <div class="project-body">
+
+                    <div class="project-meta">
+                        RCJ Soccer Open · 2027 (In Progress)
+                    </div>
+
+                    <h3>Thrive</h3>
+
+                    <p class="project-description">
+                        RCJ Soccer Vision部門に向けたロボット開発。
+                        東は東京、西は福岡まで点在するチームメンバーとGitHubを活用したオープンソース形式での開発を行っている。
+                    </p>
+
+                    <div class="role-title">My Role</div>
+
+                    <div class="role-list">
+
+                        <div class="role-item">
+                            チームリーダーとして開発全体の進行管理・設計方針統括
+                        </div>
+
+                        <div class="role-item">
+                            Autodesk Fusionを用いたロボット機構設計・3D CAD制作、CNC加工・3Dプリント
+                        </div>
+
+                        <div class="role-item">
+                            KiCadを用いた回路基板設計
+                        </div>
+
+                        <div class="role-item">
+                            GitHubを利用したオープンソース開発環境の構築
+                        </div>
+
+                        <div class="role-item">
+                            資金・部品調達
+                        </div>
+
+                    </div>
+
+                    <div class="project-info">
+
+                        <div class="info-item">
+                            <div class="info-label">Category</div>
+                            <div class="info-value">Soccer Vision (Open)</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">feature</div>
+                            <div class="info-value">Open Source</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">Result</div>
+                            <div class="info-value">---</div>
+                        </div>
+
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">Autodesk Fusion</span>
+                        <span class="tag">KiCad</span>
+                        <span class="tag">GitHub</span>
+                        <span class="tag">3D print</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="skills">
+
+    <div class="container">
+
+        <div class="section-head">
+            <div class="section-label">Skills</div>
+            <h2 class="section-title">Technical Skills</h2>
+        </div>
+
+        <div class="skills">
+
+            <div class="skill-card">
+
+                <h3>Programming</h3>
+
+                <div class="skill-list">
+                    <span class="tag">C</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">JavaScript</span>
+                </div>
+
+            </div>
+
+            <div class="skill-card">
+
+                <h3>3DCAD / Fabrication</h3>
+
+                <div class="skill-list">
+                    <span class="tag">Autodesk Fusion</span>
+                    <span class="tag">3D Printing (Adventure 5M)</span>
+                    <span class="tag">CNC (kitmill)</span>
+                </div>
+
+            </div>
+
+            <div class="skill-card">
+
+                <h3>EDA / Electronics</h3>
+
+                <div class="skill-list">
+                    <span class="tag">KiCad</span>
+                </div>
+
+            </div>
+
+            <div class="skill-card">
+
+                <h3>Development Tools</h3>
+
+                <div class="skill-list">
+                    <span class="tag">Git</span>
+                    <span class="tag">GitHub</span>
+                    <span class="tag">Arduino IDE</span>
+                    <span class="tag">MaixPy IDE</span>
+                    <span class="tag">VS Code</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="career">
+
+    <div class="container">
+
+        <div class="section-head">
+            <div class="section-label">Timeline</div>
+            <h2 class="section-title">Career / Experience</h2>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-line"></div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-content">
+                    <div class="timeline-year">2026.04</div>
+                    <h3>大阪大学 入学</h3>
+                    <p>基礎工学部 システム科学科</p>
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-content">
+                    <div class="timeline-year">2026.03</div>
+                    <h3>和歌山県立桐蔭高等学校 卒業</h3>
+                    <p>普通科</p>
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-content">
+                    <div class="timeline-year">2025.03</div>
+                    <h3>RCJ Soccer Lightweight (Infrared) にて全国4位を収める</h3>
+                    <p>3位までのチームが世界大会に出場することができた。昨シーズンもあと一歩で世界大会出場権を逃し、悔しさの残る結果となった。</p>
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-content">
+                    <div class="timeline-year">2024.04</div>
+                    <h3>ボランティア活動としてロボット教室を主催</h3>
+                    <p>地域の小中学生対象にロボット教室を主催した。参加を呼びかけるポスター制作、カリキュラム策定、保護者様や大会運営への連絡、大会当日の誘導に至るまで全てを行った。</p>
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-content">
+                    <div class="timeline-year">2023.04</div>
+                    <h3>和歌山県立桐蔭高等学校 入学</h3>
+                    <p>普通科</p>
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-content">
+                    <div class="timeline-year">2018.04</div>
+                    <h3>RCJ Soccer Beginnners (Entry) に初出場</h3>
+                    <p>桐蔭中学校主催のロボット教室に参加し、初めてロボットの大会に出場した。全国24位。その後桐蔭中学校科学部に入学・入部。</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="hardware-thought">
+
+    <div class="container">
+
+        <div class="section-head">
+            <div class="section-label">Philosophy</div>
+            <h2 class="section-title">
+                Why Hardware
+            </h2>
+        </div>
+
+        <div class="thought-box">
+
+            <p>
+                私の開発のモチベーションは、「おもしろい」と感じるシステムを実際に形にすることにあります。
+            </p>
+
+            <p>
+                これまで一貫して、新しい機構や制御、システムが実際に機能する瞬間に得られる「おもしろい」を追求してきました。
+            </p>
+
+            <p>
+                また、ソフトウェアだけでは完結しない、モーター・センサ・機構・回路が相互に作用するシステム・ハードウェア設計に強い魅力を感じています。
+            </p>
+
+            <p>
+                特にロボット開発では、アイデアを実際に動く形へ落とし込む過程に大きな「おもしろい」があります。
+            </p>
+
+            <p>
+                現在は大阪大学でシステム科学を学びながら、
+                より大規模で高度なロボット・ハードウェアシステムの開発を目指しています。
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="contact">
+
+    <div class="container">
+
+        <div class="section-head">
+            <div class="section-label">Contact</div>
+            <h2 class="section-title">Let's Build Something</h2>
+        </div>
+
+        <div class="contact-box">
+
+            <p class="contact-message">
+                ロボット・ハードウェア開発を通して、「おもしろい」を一緒に作りませんか。<br>お気軽にご連絡ください。
+            </p>
+
+            <div class="email-label">
+                Email
+            </div>
+
+            <div class="email-address">
+                u029004a@ecs.osaka-u.ac.jp
+            </div>
+
+            <div class="links">
+
+                <a class="link" href="https://github.com/ryo-robot14" target="_blank">
+
+                    <div class="link-name">
+                        GitHub
+                    </div>
+
+                    <div class="link-handle">
+                        @ryo-robot14
+                    </div>
+
+                </a>
+
+                <a class="link" href="https://x.com/ryo_robot14" target="_blank">
+
+                    <div class="link-name">
+                        X / Twitter
+                    </div>
+
+                    <div class="link-handle">
+                        @ryo_robot14
+                    </div>
+
+                </a>
+
+                <a class="link" href="https://instagram.com/ryo.robot14" target="_blank">
+
+                    <div class="link-name">
+                        Instagram
+                    </div>
+
+                    <div class="link-handle">
+                        @ryo.robot14
+                    </div>
+
+                </a>
+
+                <a class="link" href="https://note.com/ryo_robot14" target="_blank">
+
+                    <div class="link-name">
+                        note
+                    </div>
+
+                    <div class="link-handle">
+                        @ryo_robot14
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 Ryo Kaijiri
+</footer>
+
+<script>
+
+const sliders = document.querySelectorAll('.project-image');
+
+sliders.forEach((slider) => {
+
+    const slides = slider.querySelectorAll('.project-slide');
+
+    let index = 0;
+
+    setInterval(() => {
+
+        slides[index].classList.remove('active');
+
+        index = (index + 1) % slides.length;
+
+        slides[index].classList.add('active');
+
+    }, 3500);
+
+});
+
+</script>
+
+</body>
+</html>
